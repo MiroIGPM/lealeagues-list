@@ -1,2 +1,2 @@
 export * from './leagues/Leagues';
-export * from './badges/Badges';
+export * from './badges/SeasonBadgeModal';

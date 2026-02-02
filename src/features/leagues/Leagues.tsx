@@ -3,7 +3,7 @@ import { VIRTUAL_LIST_OVERSCAN, ESTIMATED_ROW_HEIGHT } from './constants/constan
 import { useLeagueContext } from './context/LeagueContext';
 import { LeagueCard } from './components/LeagueCard/LeagueCard';
 import { LeagueFilters } from './components/LeagueFilters/LeagueFilters';
-import { SeasonBadgeModal } from '../badges/Badges';
+import { SeasonBadgeModal } from '../badges/SeasonBadgeModal';
 
 export const Leagues = () => {
   const {
