@@ -1,0 +1,6 @@
+const MS_PER_SECOND = 1000;
+const MS_PER_MINUTE = 60 * MS_PER_SECOND;
+
+export const QUERY_STALE_TIME = 5 * MS_PER_MINUTE;
+export const QUERY_CACHE_TIME = 30 * MS_PER_MINUTE;
+export const QUERY_RETRY_COUNT = 2;

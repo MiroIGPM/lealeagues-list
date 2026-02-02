@@ -1,0 +1,6 @@
+const MS_PER_SECOND = 1000;
+const DEFAULT_TIMEOUT_SECONDS = 10;
+
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+export const API_TIMEOUT = DEFAULT_TIMEOUT_SECONDS * MS_PER_SECOND;
