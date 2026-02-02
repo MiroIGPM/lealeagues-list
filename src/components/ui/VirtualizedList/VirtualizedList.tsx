@@ -106,6 +106,13 @@ export const VirtualizedList = <T,>({
               data-index={virtualRow.index}
               ref={rowVirtualizer.measureElement}
               className={`${gridClassName} ${gridColsClass}`}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%', 
+                transform: `translateY(${virtualRow.start}px)`,
+              }}
             >
               {row.map((item, itemIndex) => {
                 const globalIndex = virtualRow.index * columnCount + itemIndex;

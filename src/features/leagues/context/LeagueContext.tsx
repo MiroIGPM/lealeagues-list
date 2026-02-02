@@ -5,6 +5,7 @@ import {
   useState,
   useMemo,
   type ReactNode,
+  useCallback,
 } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchLeagues } from '../api/leagues';
@@ -63,17 +64,25 @@ export const LeagueProvider = ({ children }: { children: ReactNode }) => {
     });
   }, [leagues, filters.searchTerm, filters.sportFilter]);
 
+  const setSearchTerm = useCallback((term: string) =>
+    setFilters((prev) => ({ ...prev, searchTerm: term }))
+, []);
+
+  const setSportFilter = useCallback((sport: string) =>
+    setFilters((prev) => ({ ...prev, sportFilter: sport }))
+, []);
+
+  const clearFilters = useCallback(() => setFilters(initialFilters), []);
+
   const value = useMemo<LeagueContextValue>(
     () => ({
       leagues,
       filteredLeagues,
       sports,
       filters,
-      setSearchTerm: (term: string) =>
-        setFilters((prev) => ({ ...prev, searchTerm: term })),
-      setSportFilter: (sport: string) =>
-        setFilters((prev) => ({ ...prev, sportFilter: sport })),
-      clearFilters: () => setFilters(initialFilters),
+      setSearchTerm,
+      setSportFilter,
+      clearFilters,
       selectedLeague,
       selectLeague: setSelectedLeague,
       clearSelection: () => setSelectedLeague(null),

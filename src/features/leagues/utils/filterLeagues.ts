@@ -22,8 +22,5 @@ export const filterLeagues = (
 };
 
 export const getUniqueSports = (leagues: League[]): string[] => {
-  return leagues
-    .map(league => league.strSport)
-    .filter((sport, index, array) => array.indexOf(sport) === index)
-    .sort();
+  return [...new Set(leagues.map(league => league.strSport))].sort();
 };

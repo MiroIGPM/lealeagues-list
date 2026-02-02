@@ -63,7 +63,9 @@ export const Leagues = () => {
         />
       )}
 
-      <SeasonBadgeModal league={selectedLeague} onClose={clearSelection} />
+      {selectedLeague && (
+        <SeasonBadgeModal league={selectedLeague} onClose={clearSelection} />
+      )}
     </div>
   );
 };

@@ -21,12 +21,11 @@ export const LeagueFilters = ({ sports }: LeagueFiltersProps) => {
     if (debouncedSearch !== filters.searchTerm) {
       setSearchTerm(debouncedSearch);
     }
-  }, [debouncedSearch, setSearchTerm]);
+  }, [debouncedSearch, setSearchTerm, filters.searchTerm]);
 
   const handleClear = () => {
     setLocalSearch(''); 
     clearFilters();   
-    setSearchTerm('');
   };
 
   return (
