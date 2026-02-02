@@ -9,8 +9,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { fetchLeagues } from '../api/leagues';
 import { filterLeagues, getUniqueSports } from '../utils/filterLeagues';
-import { useDebounce } from '../../../hooks';
-import { DEBOUNCE_DELAY } from '../../../hooks/constants';
 import { LEAGUES_QUERY_KEY } from '../constants/constants';
 import type { League, FilterState } from '../../../types';
 
@@ -53,8 +51,6 @@ export const LeagueProvider = ({ children }: { children: ReactNode }) => {
     queryFn: fetchLeagues,
   });
 
-  const debouncedSearchTerm = useDebounce(filters.searchTerm, DEBOUNCE_DELAY);
-
   const sports = useMemo(() => {
     return leagues ? getUniqueSports(leagues) : [];
   }, [leagues]);
@@ -62,10 +58,10 @@ export const LeagueProvider = ({ children }: { children: ReactNode }) => {
   const filteredLeagues = useMemo(() => {
     if (!leagues) return [];
     return filterLeagues(leagues, {
-      searchTerm: debouncedSearchTerm,
+      searchTerm: filters.searchTerm,
       sportFilter: filters.sportFilter,
     });
-  }, [leagues, debouncedSearchTerm, filters.sportFilter]);
+  }, [leagues, filters.searchTerm, filters.sportFilter]);
 
   const value = useMemo<LeagueContextValue>(
     () => ({

@@ -7,13 +7,13 @@ import { HomePage } from './pages';
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <LeagueProvider>
+      <ErrorBoundary>
         <Layout>
-          <ErrorBoundary>
+          <LeagueProvider>
             <HomePage />
-          </ErrorBoundary>
+          </LeagueProvider>
         </Layout>
-      </LeagueProvider>
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 };

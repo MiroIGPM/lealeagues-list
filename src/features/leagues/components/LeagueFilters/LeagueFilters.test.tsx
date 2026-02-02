@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { LeagueFilters } from './LeagueFilters';
+import { DEBOUNCE_DELAY } from '../../../../hooks';
 
 const mockContextValue = {
   filters: { searchTerm: '', sportFilter: '' },
@@ -41,14 +42,24 @@ describe('LeagueFilters', () => {
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
-  it('calls setSearchTerm on input change', () => {
+  it('calls setSearchTerm after debounce on input change', async () => {
+    vi.useFakeTimers();
+
     render(<LeagueFilters sports={sports} />);
 
     fireEvent.change(screen.getByPlaceholderText('Search leagues...'), {
       target: { value: 'test' },
     });
 
+    expect(mockContextValue.setSearchTerm).not.toHaveBeenCalled();
+
+    await act(async () => {
+      vi.advanceTimersByTime(DEBOUNCE_DELAY);
+    });
+
     expect(mockContextValue.setSearchTerm).toHaveBeenCalledWith('test');
+
+    vi.useRealTimers();
   });
 
   it('calls setSportFilter on select change', () => {
