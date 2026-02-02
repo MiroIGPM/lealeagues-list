@@ -7,9 +7,9 @@ import {
   ImagePlaceholderIcon,
   ErrorState,
   EmptyState,
-} from '../../components/ui';
-import { useSeasons } from './hooks/useSeasons';
-import type { League } from '../../types';
+} from '../../../../components/ui';
+import { useSeasons } from '../../hooks/useSeasons';
+import type { League } from '../../../../types';
 
 export interface SeasonBadgeModalProps {
   league: League | null;
@@ -25,8 +25,10 @@ export const SeasonBadgeModal = (
   const [selectedSeasonIndex, setSelectedSeasonIndex] = useState(0);
   const previousLeagueIdRef = useRef<string | null>(null);
 
+
   const isOpen = league !== null;
-  const currentLeagueId = league?.idLeague ?? null;
+
+    const currentLeagueId = league?.idLeague ?? null;
 
   if (currentLeagueId !== previousLeagueIdRef.current) {
     previousLeagueIdRef.current = currentLeagueId;
@@ -34,6 +36,7 @@ export const SeasonBadgeModal = (
       setSelectedSeasonIndex(0);
     }
   }
+
 
   const seasonOptions = seasons?.map((s) => s.strSeason) ?? [];
   const selectedSeason = seasons?.[selectedSeasonIndex];
